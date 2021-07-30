@@ -70,7 +70,7 @@ public class UsuarioController {
 	@PostMapping(path = "/imagen")
 	public  ResponseEntity<String> prueba(@RequestParam MultipartFile multipartFile, @RequestParam String id) throws IOException {
 			logger.info("Guardando imagen");
-			String url = "D:\\Proyecto\\Lostrip\\src\\assets\\Imagenes\\usuarios\\";
+			String url = "D:\\Proyecto\\LostripFinal\\src\\assets\\Imagenes\\usuarios\\";
 			if(!multipartFile.isEmpty()) {
 				byte[] bytes = multipartFile.getBytes();
 				Path path = Paths.get(url + id + multipartFile.getOriginalFilename());
