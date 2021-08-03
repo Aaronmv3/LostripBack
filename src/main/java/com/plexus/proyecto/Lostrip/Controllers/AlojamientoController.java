@@ -78,16 +78,15 @@ public class AlojamientoController {
 	@PostMapping(path="{id}/comentario/borrar")
 	public  ResponseEntity<String> deleteComent(@RequestBody Comentarios coment, @PathVariable(name= "id") Long id) {
 		logger.info("deleting comentario of alojamiento");
-		Comentarios comentDel = new Comentarios( coment.getId(),coment.getComentario(), coment.getUserID());
 		Alojamientos aloj = this.alojamientoService.findOne(id);
 
 		for(Comentarios c : aloj.getComentarios()) {
-			if(c.getId() == comentDel.getId()) {
-				comentDel = c;
+			if(c.getId() == coment.getId()) {
+				coment = c;
 				break;
 			}
 		}
-		aloj.removeComentario(comentDel);
+		aloj.removeComentario(coment);
 		this.alojamientoService.add(aloj);
 		return ResponseEntity.ok("Borrado");
 		

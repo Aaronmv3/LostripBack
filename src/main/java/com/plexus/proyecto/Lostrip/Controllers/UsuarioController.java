@@ -58,12 +58,11 @@ public class UsuarioController {
 		 	return ResponseEntity.ok(this.usuarioService.add(user));
 	}
 	
-	@PostMapping(path="/reserva")
-	public  ResponseEntity<Usuario> reserva(@RequestParam String idAlojamiento, @RequestParam String idUsuario ) {
+	@PostMapping(path="{id}/reserva")
+	public  ResponseEntity<Usuario> reserva(@RequestBody Reservas reserva, @PathVariable(name= "id") String idUsuario) {
 		logger.info("Añadiendo reserva");
 		Usuario user = this.usuarioService.findOne(idUsuario);
-		Reservas rev = new Reservas(idAlojamiento);
-		user.addReserva(rev);
+		user.addReserva(reserva);
 	 	return ResponseEntity.ok(this.usuarioService.add(user));
 }
 	
@@ -87,20 +86,20 @@ public class UsuarioController {
 		return ResponseEntity.ok(this.usuarioService.add(user));
 		
 	}
-	@PostMapping(path = "/reserva/borrar")
-	public  ResponseEntity<String> deleteReserva(@RequestParam String idAlojamiento, @RequestParam String idUsuario) {
+	@PostMapping(path = "{id}/reserva/borrar")
+	public  ResponseEntity<String> deleteReserva(@RequestBody Reservas reserva, @PathVariable(name= "id") String idUsuario) {
 		logger.info("deleting reserva");
 		
 		Usuario user = this.usuarioService.findOne(idUsuario);
-		Reservas rBorrado = new Reservas(idAlojamiento);
+		
 		
 		for(Reservas r : user.getReservas()) {
-			if(r.getAlojamientoId() == rBorrado.getAlojamientoId()) {
-				rBorrado = r;
+			if(r.getAlojamientoId() == reserva.getAlojamientoId()) {
+				reserva = r;
 				break;
 			}
 		}
-		user.deleteReserva(rBorrado);
+		user.deleteReserva(reserva);
 		this.usuarioService.add(user);
 		
 		return ResponseEntity.ok("Borrado");

@@ -18,6 +18,8 @@ public class Comentarios {
 	
 	private String userID;
 	
+	private double valoracion;
+	
 	//Constructors
 	/**
 	 * 
@@ -25,27 +27,16 @@ public class Comentarios {
 	public Comentarios() {
 	}
 
-	
 	/**
 	 * @param comentario
 	 * @param userID
+	 * @param valoracion
 	 */
-	public Comentarios(String comentario, String userID) {
+	public Comentarios(String comentario, String userID, double valoracion) {
 		this.comentario = comentario;
 		this.userID = userID;
+		this.valoracion = valoracion;
 	}
-
-	/**
-	 * @param id
-	 * @param comentario
-	 * @param userID
-	 */
-	public Comentarios(long id, String comentario, String userID) {
-		this.id = id;
-		this.comentario = comentario;
-		this.userID = userID;
-	}
-
 
 	//Getters & setters
 	/**
@@ -83,6 +74,21 @@ public class Comentarios {
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
+
+	/**
+	 * @return the valoracion
+	 */
+	public double getValoracion() {
+		return valoracion;
+	}
+
+	/**
+	 * @param valoracion the valoracion to set
+	 */
+	public void setValoracion(double valoracion) {
+		this.valoracion = valoracion;
+	}
+	
 	
 	
 }
